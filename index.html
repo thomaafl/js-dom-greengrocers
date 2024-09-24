@@ -12,6 +12,15 @@
   <body>
     <header id="store">
       <h1>Greengrocers</h1>
+      <div class="store-filter">
+        <button class="dropbtn">Dropdown</button>
+        <div class="dropdown-content">
+          <a href="#" onclick="renderItems('fruit')">Fruit</a>
+          <a href="#" onclick="renderItems('berry')">Berry</a>
+          <a href="#" onclick="renderItems('vegetable')">Vegetable</a>
+          <a href="#" onclick="renderItems('all')">All</a>
+        </div>
+      </div>
       <ul class="item-list store--item-list">
         <!-- Take a look at store-item.html -->
       </ul>

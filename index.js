@@ -3,61 +3,79 @@ const state = {
     {
       id: "001-beetroot",
       name: "beetroot",
-      price: 0.35
+      price: 0.35,
+      type: "vegetable"
     },
     {
       id: "002-carrot",
       name: "carrot",
-      price: 0.35
+      price: 0.35,
+      type: "vegetable"
     },
     {
       id: "003-apple",
       name: "apple",
-      price: 0.35
+      price: 0.35,
+      type: "fruit",
     },
     {
       id: "004-apricot",
       name: "apricot",
-      price: 0.35
+      price: 0.35,
+      type: "fruit"
     },
     {
       id: "005-avocado",
       name: "avocado",
-      price: 0.35
+      price: 0.35,
+      type: "vegetable"
     },
     {
       id: "006-bananas",
       name: "bananas",
-      price: 0.35
+      price: 0.35,
+      type: "fruit"
     },
     {
       id: "007-bell-pepper",
       name: "bell pepper",
-      price: 0.35
+      price: 0.35,
+      type: "vegetable"
     },
     {
       id: "008-berry",
       name: "berry",
-      price: 0.35
+      price: 0.35,
+      type: "berry"
     },
     {
       id: "009-blueberry",
       name: "blueberry",
-      price: 0.35
+      price: 0.35,
+      type: "berry"
     },
     {
       id: "010-eggplant",
       name: "eggplant",
-      price: 0.35
+      price: 0.35,
+      type: "vegetable"
     }
   ],
   cart: []
 };
 
 
-function renderItems() {
+function renderItems(type) {
+  let filteredItems
+
+  if (type === 'all') {
+    filteredItems = state.items
+  } else {
+    filteredItems = state.items.filter(item => item.type === type) 
+  }
   const storeList = document.querySelector('.store--item-list')
-  state.items.forEach(item => {
+  storeList.innerHTML =``
+  filteredItems.forEach(item => {
     const li = document.createElement('li')
     li.innerHTML = `
       <div class="store--item-icon">
@@ -111,17 +129,17 @@ function showCart() {
 function itemQuantity(item, valueChange) {
   item.quantity += valueChange
   if (item.quantity === 0){
-    state.cart.pop(i => i.id === item.id)
+    state.cart = state.cart.filter(i => i.id !== item.id)
   }
   showCart()
 }
 
 function totalCost() {
   const totalElement = document.querySelector('.total-number')
-  const total = cart.state.reduce((acc, item) => acc + (item.price * item.quantity), 0)
-  totalElement.textContent = `${Math.round(total)}`
+  const total = state.cart.reduce((acc, item) => acc + (item.price * item.quantity), 0)
+  totalElement.textContent = `£${total.toFixed(2)}`
   
 }
 
-renderItems()
+renderItems('all')
 //showCart()
